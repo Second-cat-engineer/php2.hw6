@@ -1,0 +1,19 @@
+{% extends 'main.html' %}
+
+{% block content %}
+<div class="row" style="padding-top: 10px; text-align: center">
+    <div class="thumbnail">
+        <div class="caption">
+            <h2>{{ article.title }}</h2>
+        </div>
+        <div>
+            {{ article.content }}
+        </div>
+        <div style="font-size: 15px">
+            {% if article.author %}
+            Автор статьи: {{ article.author.firstName }} {{ article.author.lastName }}
+            {% endif %}
+        </div>
+    </div>
+</div>
+{%  endblock %}
