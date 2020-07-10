@@ -8,20 +8,23 @@ use \App\Components\Logger;
 $uri = $_SERVER['REQUEST_URI'];
 $parts = explode('/', $uri);
 
-$module = !empty($parts[1]) ? ucfirst($parts[1]) : 'Index';
-$controller = !empty($parts[2]) ? ucfirst($parts[2]) : null;
+$moduleName = !empty($parts[1]) ? ucfirst($parts[1]) : 'Index';
+$controllerName = !empty($parts[2]) ? ucfirst($parts[2]) : null;
 
-if ('Admin' === $module) {
+if ('Admin' === $moduleName) {
     $action = !empty($parts[3]) ? ucfirst($parts[3]) : null;
-    $ctrlName = '\App\Controllers\\' . $module . '\\' . $controller . '\\' . $action;
-} elseif ('Index' === $module) {
-    $ctrlName = '\App\Controllers\Index';
+    $ctrlName = '\App\Modules\\' . $controllerName . '\Controllers\Admin\\' . $action;
+} elseif ('Index' === $moduleName) {
+    $ctrlName = '\App\Modules\Index\Controllers\Index';
 } else {
-    $ctrlName = '\App\Controllers\\' . $module . '\\' . $controller;
+    $ctrlName = '\App\Modules\\' . $moduleName . '\Controllers\\' . $controllerName;
+    echo $ctrlName;
 }
 
 try {
     if (!class_exists($ctrlName)) {
+        echo 'there';
+        var_dump($ctrlName);
         throw new Error404('Ошибка! Страница не найдена!', 404);
     }
 } catch (\Exception $e) {
@@ -29,6 +32,8 @@ try {
     $error();
     die();
 }
+
+var_dump($ctrlName);
 
 try {
     $ctrl = new $ctrlName();

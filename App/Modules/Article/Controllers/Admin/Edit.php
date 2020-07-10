@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Controllers\Admin\Article;
+namespace App\Modules\Article\Controllers\Admin;
 
-use App\Controllers\Admin;
+use App\Controllers\AdminController;
 use App\Exceptions\Error404;
 use \App\Models\Article;
 
-class Edit extends Admin
+class Edit extends AdminController
 {
     protected function action()
     {
@@ -15,6 +15,6 @@ class Edit extends Admin
             throw new Error404('Ошибка при редактировании! Статья с таким id не существует', 404);
         }
         $this->view->article = $article;
-        $this->view->display(__DIR__ . '/../../../templates/admin/editArticle.php');
+        $this->view->display(__DIR__ . '/../../templates/admin/editArticle.php');
     }
 }

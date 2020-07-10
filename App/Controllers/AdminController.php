@@ -4,9 +4,13 @@ namespace App\Controllers;
 
 use \App\Components\View;
 
-abstract class Controller
+abstract class AdminController
 {
     protected object $view;
+
+    // пока что по умолчанию доступ будет админом,
+    // после добавления аутентификации будет объект User
+    protected $access = 'admin';
 
     public function __construct()
     {
@@ -15,7 +19,10 @@ abstract class Controller
 
     protected function access():bool
     {
-        return true;
+        if ('admin' === $this->access) {
+            return true;
+        }
+        return false;
     }
 
     public function __invoke()

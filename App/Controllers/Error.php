@@ -2,7 +2,7 @@
 
 namespace App\Controllers;
 
-class Error extends Controller
+class Error extends BaseController
 {
     public function __construct(\Exception $error)
     {
@@ -12,6 +12,6 @@ class Error extends Controller
 
     protected function action()
     {
-        $this->view->twigDisplay('error.html', ['error' => $this->view->error]);
+        $this->view->twigDisplay('/App/templates/error.html', ['error' => $this->view->error]);
     }
 }

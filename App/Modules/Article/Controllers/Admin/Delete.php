@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Controllers\Admin\Article;
+namespace App\Modules\Article\Controllers\Admin;
 
-use App\Controllers\Admin;
+use App\Controllers\AdminController;
 use App\Exceptions\Error404;
 use \App\Models\Article;
 
-class Delete extends Admin
+class Delete extends AdminController
 {
     protected function action()
     {

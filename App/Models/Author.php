@@ -2,7 +2,7 @@
 
 namespace App\Models;
 
-use App\Components\Model;
+use App\Models\Model;
 
 /**
  * @property $login

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Components;
+namespace App\Models;
 
 use App\Components\Db;
 use App\Exceptions\MultiException;

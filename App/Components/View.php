@@ -14,7 +14,7 @@ class View implements \Countable, \Iterator
 
     public function __construct()
     {
-        $loader = new FilesystemLoader(__DIR__ . '/../templates');
+        $loader = new FilesystemLoader(__DIR__ . '/../../');
         $this->twig = new Environment($loader);
     }
 

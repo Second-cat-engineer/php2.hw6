@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use App\Exceptions\Validation;
-use App\Components\Model;
+use App\Models\Author;
 
 /**
  * Class One
