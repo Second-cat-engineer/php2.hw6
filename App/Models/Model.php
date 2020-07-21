@@ -134,4 +134,11 @@ abstract class Model
             throw $errors;
         }
     }
+
+    public static function findAllEach()
+    {
+        $db = Db::instance();
+        $sql = 'SELECT * FROM ' . static::TABLE;
+        return $db->queryEach($sql, static::class);
+    }
 }

@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Modules\Article\Controllers;
+namespace App\Modules\Article\Controllers\Index;
 
 use \App\Controllers\BaseController;
 use \App\Models\Article;

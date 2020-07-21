@@ -1,15 +1,15 @@
 <?php
 
-namespace App\Modules\Index\Controllers;;
+namespace App\Modules\Article\Controllers\Index;
 
 use \App\Controllers\BaseController;
-use App\Models\Article;
+use \App\Models\Article;
 
-class Index extends BaseController
+class All extends BaseController
 {
     protected function action()
     {
-        $articles = Article::findLastCount(3);
+        $articles = Article::findAllEach();
         $this->view->twigDisplay('/App/Modules/Article/templates/index/articles.html', ['articles' => $articles]);
     }
 }

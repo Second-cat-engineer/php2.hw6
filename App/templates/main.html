@@ -19,9 +19,20 @@
             <li>
                 <a href="/">
                     <span class="glyphicon glyphicon-home"></span>
-                    <div> Главная страница </div>
+                    <div> Главная </div>
                 </a>
             </li>
+            <li>
+                <a href="/article/lastCount">
+                    <span class="glyphicon glyphicon-list-alt"></span>
+                    <div> Статьи </div>
+                </a>
+            </li>
+            {% if user %}
+                {% include '/App/templates/menuForRegistredUser.html' %}
+            {% else %}
+                {% include '/App/templates/menuForUnRegistredUser.html' %}
+            {% endif %}
         </ul>
     </div>
     <!-- Основная часть сайта -->

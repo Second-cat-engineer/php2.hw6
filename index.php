@@ -15,9 +15,9 @@ if ('Admin' === $moduleName) {
     $action = !empty($parts[3]) ? ucfirst($parts[3]) : null;
     $ctrlName = '\App\Modules\\' . $controllerName . '\Controllers\Admin\\' . $action;
 } elseif ('Index' === $moduleName) {
-    $ctrlName = '\App\Modules\Index\Controllers\Index';
+    $ctrlName = '\App\Modules\Index\Controllers\Index\Index';
 } else {
-    $ctrlName = '\App\Modules\\' . $moduleName . '\Controllers\\' . $controllerName;
+    $ctrlName = '\App\Modules\\' . $moduleName . '\Controllers\Index\\' . $controllerName;
     echo $ctrlName;
 }
 

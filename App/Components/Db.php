@@ -51,4 +51,16 @@ class Db
         }
         return $res;
     }
+
+    public function queryEach($sql, $class, $params = [])
+    {
+        $sth = $this->dbh->prepare($sql);
+        if (!$sth->execute($params)) {
+            throw new DbException('Ошибка при выполнении запроса: ' . $sql);
+        }
+        $sth->setFetchMode(\PDO::FETCH_CLASS, $class);
+        while ($res = $sth->fetch()) {
+            yield $res;
+        }
+    }
 }
