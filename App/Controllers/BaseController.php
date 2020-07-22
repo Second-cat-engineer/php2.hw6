@@ -2,7 +2,9 @@
 
 namespace App\Controllers;
 
+use App\Components\Auth\Auth;
 use \App\Components\View;
+use App\Models\User;
 
 abstract class BaseController
 {
@@ -11,6 +13,13 @@ abstract class BaseController
     public function __construct()
     {
         $this->view = new View();
+
+        $session = new Auth();
+        if (null == $session->getCurrentUser()) {
+            $this->view->user = null;
+        } else {
+            $this->view->user = User::findByLogin($session->getCurrentUser());
+        }
     }
 
     protected function access():bool

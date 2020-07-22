@@ -12,6 +12,9 @@ class LastCount extends BaseController
         //доделать чтоб можно было передавать число в качестве аргумента!
         $count = 3;
         $articles = Article::findLastCount($count);
-        $this->view->twigDisplay('/App/Modules/Article/templates/index/articles.html', ['articles' => $articles]);
+        $this->view->twigDisplay('/App/Modules/Article/templates/index/articles.html', [
+            'articles' => $articles,
+            'user' => $this->view->user,
+        ]);
     }
 }

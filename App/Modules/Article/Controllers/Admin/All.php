@@ -10,6 +10,6 @@ class All extends AdminController
     protected function action()
     {
         $this->view->articles = Article::findAll();
-        $this->view->display(__DIR__ . '/../../templates/admin/adminPanel.php');
+        $this->view->display(__DIR__ . '/../../templates/admin/all.php');
     }
 }

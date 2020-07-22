@@ -8,6 +8,6 @@ class Index extends AdminController
 {
     protected function action()
     {
-        // TODO: Implement action() method.
+        $this->view->display(__DIR__ . '/../../templates/admin/index.php');
     }
 }

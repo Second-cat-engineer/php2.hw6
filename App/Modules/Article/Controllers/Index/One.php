@@ -20,6 +20,9 @@ class One extends BaseController
         if (false === $article) {
             throw new Error404('Страница не найдена!', 404);
         }
-        $this->view->twigDisplay('/App/Modules/Article/templates/index/article.html', ['article' => $article]);
+        $this->view->twigDisplay('/App/Modules/Article/templates/index/article.html', [
+            'article' => $article,
+            'user' => $this->view->user,
+        ]);
     }
 }

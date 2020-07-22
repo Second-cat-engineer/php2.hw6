@@ -3,20 +3,23 @@
 namespace App\Models;
 
 use App\Components\Db;
-use App\Components\Model;
+use App\Models\Model;
 
+/**
+ * @property $login
+ * @property $passwordHash
+ * @property $access
+ */
 class User extends Model
 {
     protected const TABLE = 'users';
-
-    public string $email;
-    public string $phone;
 
     public static function findByLogin($login)
     {
         $parameters[':login'] = $login;
         $db = Db::instance();
-        $res = $db->query('SELECT * FROM ' . static::TABLE . ' WHERE login=:login', static::class, $parameters);
+        $sql = 'SELECT * FROM ' . static::TABLE . ' WHERE login=:login';
+        $res = $db->query($sql, static::class, $parameters);
         if (empty($res)) {
             return false;
         }

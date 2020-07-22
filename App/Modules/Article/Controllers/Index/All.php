@@ -10,6 +10,9 @@ class All extends BaseController
     protected function action()
     {
         $articles = Article::findAllEach();
-        $this->view->twigDisplay('/App/Modules/Article/templates/index/articles.html', ['articles' => $articles]);
+        $this->view->twigDisplay('/App/Modules/Article/templates/index/articles.html', [
+            'articles' => $articles,
+            'user' => $this->view->user,
+        ]);
     }
 }

@@ -12,6 +12,9 @@ class Error extends BaseController
 
     protected function action()
     {
-        $this->view->twigDisplay('/App/templates/error.html', ['error' => $this->view->error]);
+        $this->view->twigDisplay('/App/templates/error.html', [
+            'error' => $this->view->error,
+            'user' => $this->view->user,
+        ]);
     }
 }

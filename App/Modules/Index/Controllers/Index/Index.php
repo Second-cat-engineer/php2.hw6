@@ -10,6 +10,8 @@ class Index extends BaseController
     protected function action()
     {
         //$articles = Article::findLastCount(3);
-        $this->view->twigDisplay('/App/Modules/Index/templates/index/index.html', []);
+        $this->view->twigDisplay('/App/Modules/Index/templates/index/index.html', [
+            'user' => $this->view->user,
+        ]);
     }
 }

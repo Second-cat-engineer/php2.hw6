@@ -1,4 +1,5 @@
 <?php
+session_start();
 require __DIR__ . '/App/autoload.php';
 
 use App\Exceptions\DbException;
@@ -18,13 +19,10 @@ if ('Admin' === $moduleName) {
     $ctrlName = '\App\Modules\Index\Controllers\Index\Index';
 } else {
     $ctrlName = '\App\Modules\\' . $moduleName . '\Controllers\Index\\' . $controllerName;
-    echo $ctrlName;
 }
 
 try {
     if (!class_exists($ctrlName)) {
-        echo 'there';
-        var_dump($ctrlName);
         throw new Error404('Ошибка! Страница не найдена!', 404);
     }
 } catch (\Exception $e) {
@@ -32,8 +30,6 @@ try {
     $error();
     die();
 }
-
-var_dump($ctrlName);
 
 try {
     $ctrl = new $ctrlName();

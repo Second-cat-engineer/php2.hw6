@@ -3,7 +3,7 @@
 <head>
     <meta charset = "utf-8">
     <meta name = "description" content = "Шаг за шагом, Step by step">
-    <title> Главная </title>
+    <title> Step by step </title>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <link rel="stylesheet" href="/App/templates/style/style.css">
 </head>
@@ -12,6 +12,14 @@
     <!-- Шапка -->
     <div style="text-align: center;">
         <img src="/App/templates/style/logo.jpg" alt="Логотип">
+    </div>
+    <div class="row" style="padding-top: 10px; padding-left: 20px">
+        Вы вошли как:
+        {% if user %}
+            {{ user.login }}
+        {% else %}
+            Гость
+        {% endif %}
     </div>
     <!-- Полоска меню  -->
     <div class="label-danger padding">
@@ -37,8 +45,7 @@
     </div>
     <!-- Основная часть сайта -->
     {% block content %}
-    основная часть сайта
-
+        основная часть сайта
     {%  endblock %}
 
     <!-- Подвал сайта -->
@@ -56,6 +63,15 @@
 
         <!-- Правая колонка, вход в админ панель -->
         <div  class="col-sm-12 col-md-4" style="text-align: center">
+            {% if user.access == 'admin' %}
+                <form action="/admin/index/index" method="post">
+                    <button type="submit" class="btn btn-default logo" style="margin: 20px">
+                        <div class="glyphicon glyphicon-cog">
+                            Вход в панель администратора
+                        </div>
+                    </button>
+                </form>
+            {% endif %}
         </div>
     </div>
 </div>
