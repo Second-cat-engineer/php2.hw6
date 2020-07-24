@@ -1,0 +1,14 @@
+{% extends '/App/templates/main.html' %}
+
+{% block content %}
+<div class="row" style="padding-top: 10px; text-align: center">
+    <div class="thumbnail">
+        <div class="caption">
+            <h2>{{ quote.quote }}</h2>
+        </div>
+        <div>
+            {{ quote.content }}
+        </div>
+    </div>
+</div>
+{%  endblock %}

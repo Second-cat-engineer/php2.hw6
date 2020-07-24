@@ -4,23 +4,23 @@
     <h1 style="text-align: center"> Статьи </h1>
     <div class="row" style="padding-top: 10px; text-align: center">
         {% for article in articles %}
-        <div class="col-sm-12 col-md-4">
-            <div class="thumbnail">
-                <div class="caption">
-                    <a href="/article/one/?id={{ article.id }}">
-                        <h2>{{ article.title }}</h2>
-                    </a>
-                </div>
-                <div>
-                    {{ article.content }}
-                </div>
-                <div style="font-size: 15px">
-                    {% if article.author %}
-                    Автор статьи: {{ article.author.firstName }} {{ article.author.lastName }}
-                    {% endif %}
+            <div class="col-sm-12 col-md-4">
+                <div class="thumbnail">
+                    <div class="caption">
+                        <a href="/article/one/?id={{ article.id }}">
+                            <h2>{{ article.title }}</h2>
+                        </a>
+                    </div>
+                    <div>
+                        {{ article.content }}
+                    </div>
+                    <div style="font-size: 15px">
+                        {% if article.author %}
+                        Автор статьи: {{ article.author.firstName }} {{ article.author.lastName }}
+                        {% endif %}
+                    </div>
                 </div>
             </div>
-        </div>
         {% endfor %}
     </div>
         <a href="/article/all">

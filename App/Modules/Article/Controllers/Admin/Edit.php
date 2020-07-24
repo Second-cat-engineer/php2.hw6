@@ -15,6 +15,6 @@ class Edit extends AdminController
             throw new Error404('Ошибка при редактировании! Статья с таким id не существует', 404);
         }
         $this->view->article = $article;
-        $this->view->display(__DIR__ . '/../../templates/admin/editArticle.php');
+        $this->view->display(__DIR__ . '/../../templates/admin/edit.php');
     }
 }

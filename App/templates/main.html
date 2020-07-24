@@ -11,7 +11,9 @@
 <div class="container">
     <!-- Шапка -->
     <div style="text-align: center;">
-        <img src="/App/templates/style/logo.jpg" alt="Логотип">
+        <a href="/">
+            <img src="/App/templates/style/logo.jpg" alt="Логотип">
+        </a>
     </div>
     <div class="row" style="padding-top: 10px; padding-left: 20px">
         Вы вошли как:
@@ -25,15 +27,15 @@
     <div class="label-danger padding">
         <ul class="pager menu">
             <li>
-                <a href="/">
-                    <span class="glyphicon glyphicon-home"></span>
-                    <div> Главная </div>
-                </a>
-            </li>
-            <li>
                 <a href="/article/lastCount">
                     <span class="glyphicon glyphicon-list-alt"></span>
                     <div> Статьи </div>
+                </a>
+            </li>
+            <li>
+                <a href="/quote/all">
+                    <span class="glyphicon glyphicon-list-alt"></span>
+                    <div> Цитаты </div>
                 </a>
             </li>
             {% if user %}

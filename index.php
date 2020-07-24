@@ -20,6 +20,7 @@ if ('Admin' === $moduleName) {
 } else {
     $ctrlName = '\App\Modules\\' . $moduleName . '\Controllers\Index\\' . $controllerName;
 }
+var_dump($ctrlName);
 
 try {
     if (!class_exists($ctrlName)) {
@@ -30,6 +31,7 @@ try {
     $error();
     die();
 }
+
 
 try {
     $ctrl = new $ctrlName();
