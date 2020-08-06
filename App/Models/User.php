@@ -13,6 +13,9 @@ use App\Models\Model;
 class User extends Model
 {
     protected const TABLE = 'users';
+    public string $login;
+    public string $access;
+    protected string $passwordHash;
 
     public static function findByLogin($login)
     {

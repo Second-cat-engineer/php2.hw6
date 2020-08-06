@@ -93,6 +93,7 @@ class Auth
             throw $errors;
         }
 
+        echo password_hash($password, PASSWORD_DEFAULT);
         $user = new User();
         $user->login = $login;
         $user->passwordHash = password_hash($password, PASSWORD_DEFAULT);
