@@ -124,7 +124,7 @@ abstract class Model
             try {
                 if ($this->$methodName($value)) {
                     $this->$prop = $value;
-                };
+                }
             } catch (\App\Exceptions\Validation $e) {
                 $errors->add($e);
             }
@@ -140,5 +140,33 @@ abstract class Model
         $db = Db::instance();
         $sql = 'SELECT * FROM ' . static::TABLE;
         return $db->queryEach($sql, static::class);
+    }
+
+    public function __get($name)
+    {
+        switch ($name) {
+            case 'author':
+                return User::findById($this->author_id);
+                break;
+            case 'heading':
+                return Heading::findById($this->heading_id);
+                break;
+            default:
+                return null;
+        }
+    }
+
+    public function __isset($name)
+    {
+        switch ($name) {
+            case 'author':
+                return !empty($this->author_id);
+                break;
+            case 'heading':
+                return !empty($this->heading_id);
+                break;
+            default:
+                return null;
+        }
     }
 }
