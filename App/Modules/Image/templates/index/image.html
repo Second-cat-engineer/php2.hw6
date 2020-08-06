@@ -1,0 +1,14 @@
+{% extends '/App/templates/main.html' %}
+
+{% block content %}
+<div class="row" style="padding-top: 10px; text-align: center">
+    <div class="thumbnail">
+        <div class="caption">
+            <h2>{{ image.title }}</h2>
+        </div>
+        <div>
+            <img src="/src/images/{{ image.path }}" style = "width: 100%">
+        </div>
+    </div>
+</div>
+{%  endblock %}
