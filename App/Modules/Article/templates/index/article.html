@@ -1,19 +1,54 @@
 {% extends '/App/templates/main.html' %}
 
 {% block content %}
-<div class="row" style="padding-top: 10px; text-align: center">
-    <div class="thumbnail">
-        <div class="caption">
-            <h2>{{ article.title }}</h2>
-        </div>
-        <div>
-            {{ article.content }}
-        </div>
-        <div style="font-size: 15px">
-            {% if article.author %}
-            Автор статьи: {{ article.author.firstName }} {{ article.author.lastName }}
-            {% endif %}
+    <div class="row" style="padding-top: 10px; text-align: center">
+        <div class="thumbnail">
+            <div class="caption">
+                <h2>{{ article.title }}</h2>
+                <h5>Рубрика: {{ article.heading.heading }}</h5>
+            </div>
+            <div>
+                {{ article.content }}
+            </div>
+            <div style="font-size: 15px">
+                {% if article.author %}
+                    Автор статьи: {{ article.author.login }}
+                {% endif %}
+            </div>
+            <div style="font-size: 15px">
+                Дата публикации: {{ article.created_at|date(fromat, timezon) }}
+            </div>
         </div>
     </div>
-</div>
+
+
+    <!-- Comments -->
+    Комментарии: <br>
+    {% for comment in comments %}
+        <div style="border: 1px; color: black">
+            <div>
+                {{ comment.comment }}
+            </div>
+            <div style="font-size: 15px">
+                Автор: {{ comment.author.login }}
+            </div>
+            <h12 style="font-size: 15px">
+                Дата публикации: {{ comment.creates_at | date('Y-m-d H:i:s') }}
+            </h12>
+        </div>
+        <hr>
+    {% endfor %}
+
+    {% if user %}
+        <form action="/comment/add" method="post">
+            Добавить комментарий <br>
+            <textarea name="comment" cols="20" rows="1"></textarea>
+            <br>
+            <button type="submit" name="article_id" value="{{ article.id }}">
+                отправить
+            </button>
+        </form>
+    {% else %}
+        Комментарии могут оставлять только авторизованные пользователи.
+    {% endif %}
 {%  endblock %}

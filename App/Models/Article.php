@@ -2,59 +2,22 @@
 
 namespace App\Models;
 
+use App\Components\Db;
 use App\Exceptions\Validation;
-use App\Models\Author;
 
 /**
  * Class One
  * @property $title
  * @property $content
  * @property int $author_id
+ * @property int $heading_id
  * @property object $author
  */
 class Article extends Model
 {
     protected const TABLE = 'articles';
 
-    public function __get($name)
-    {
-        if ('author' === $name && !empty($this->author_id)) {
-            return $this->author = Author::findById($this->author_id);
-        }
-        return null;
-
-        /*
-         * на случай, если не только автор будет запрашиваться
-        switch ($name) {
-            case 'author':
-                return Author::findById($this->author_id);
-                break;
-            default:
-                return null;
-        }
-        */
-    }
-
-    public function __isset($name)
-    {
-        if ('author' === $name) {
-            return !empty($this->author_id);
-        }
-        return null;
-
-        /*
-        switch ($name) {
-            case 'author':
-                return !empty($this->author_id);
-                break;
-            default:
-                return null;
-        }
-        */
-    }
-
-
-    public function validatorTitle($title)
+    protected function validatorTitle($title)
     {
         if (empty($title)) {
             throw new Validation('Заголовок не должен быть пустым!');
@@ -62,11 +25,39 @@ class Article extends Model
         return true;
     }
 
-    public function validatorContent($content)
+    protected function validatorContent($content)
     {
         if (empty($content)) {
             throw new Validation('Текст не должен быть пустым!');
         }
         return true;
+    }
+
+    protected function validatorHeading_id($heading_id)
+    {
+        return true;
+    }
+
+    public static function findByHeadingId($heading_id)
+    {
+        $param[':heading_id'] = $heading_id;
+        $db = Db::instance();
+        $sql = 'SELECT * FROM ' . static::TABLE . ' WHERE heading_id=:heading_id';
+        $res = $db->query($sql, static::class, $param);
+        if (empty($res)) {
+            return false;
+        }
+        return $res;
+    }
+
+    public static function findByTitle($title)
+    {
+        $db = Db::instance();
+        $sql = 'SELECT * FROM ' . static::TABLE . ' WHERE title LIKE \'%' . $title . '%\'';
+        $res = $db->query($sql, static::class, []);
+        if (empty($res)) {
+            return false;
+        }
+        return $res;
     }
 }

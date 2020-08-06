@@ -7,6 +7,7 @@
         <td>idArticle</td>
         <td>Заголовок статьи</td>
         <td>Текст</td>
+        <td>Рубрика</td>
         <td>Автор</td>
         <td>Редактировать</td>
         <td>Удалить</td>
@@ -16,7 +17,8 @@
             <td><?php echo $article->getId(); ?></td>
             <td><?php echo $article->title; ?></td>
             <td><?php echo substr($article->content, 0, 200); ?></td>
-            <td><?php echo $article->author_id; ?></td>
+            <td><?php echo $article->heading->heading; ?></td>
+            <td><?php echo $article->author->login; ?></td>
             <td>
                 <form action= "/admin/article/edit" method= "post" >
                     <button name="id" value="<?php echo $article->getId() ?>">
