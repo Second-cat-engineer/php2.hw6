@@ -2,8 +2,8 @@
 return [
     'db' => [
         'host' => 'localhost',
-        'dbname' => 'sbs',
-        'user' => 'sbs',
+        'dbname' => 'sbs_db',
+        'user' => 'postgres',
         'password' => 'A5721ec93!',
     ]
 ];

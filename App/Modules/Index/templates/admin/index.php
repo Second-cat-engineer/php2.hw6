@@ -7,6 +7,8 @@
 </br>
 <a href="/admin/quote/all"> Цитаты </a>
 </br>
+<a href="/admin/image/all"> Галлерея </a>
+</br>
 <a href="/admin/user/all"> Пользователи </a>
 </br>
 

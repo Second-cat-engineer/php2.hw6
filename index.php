@@ -26,14 +26,6 @@ try {
     if (!class_exists($ctrlName)) {
         throw new Error404('Ошибка! Страница не найдена!', 404);
     }
-} catch (\Exception $e) {
-    $error = new \App\Controllers\Error($e);
-    $error();
-    die();
-}
-
-
-try {
     $ctrl = new $ctrlName();
     $ctrl();
 } catch (DbException | Error404 | \Exception $e) {
