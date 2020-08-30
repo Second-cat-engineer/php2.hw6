@@ -2,30 +2,46 @@
 
 namespace App\Models;
 
+use App\Components\Validator;
 use App\Exceptions\Validation;
+use App\Models\User;
 
+/**
+ * Class Image
+ * @property $id
+ * @property string $title
+ * @property string $content
+ * @property string $path
+ * @property int $author_id
+ * @property $created_at
+ * @property object $author
+ */
 class Image extends Model
 {
-    public $path;
+    public string $path;
     public const TABLE = 'images';
 
-    protected function validator($prop, $value)
+    use Validator;
+
+    public function __get($name)
     {
-        switch ($prop) {
-            case 'title':
-                if (empty($value)) {
-                    throw new Validation('Заголовок не должен быть пустым!');
-                }
-                return $this->$prop = $value;
-                break;
-            case 'content':
-                if (empty($value)) {
-                    throw new Validation('Текст не должен быть пустым!');
-                }
-                return $this->$prop = $value;
+        switch ($name) {
+            case 'author':
+                return User::findById($this->author_id);
                 break;
             default:
-                return $this->$prop = $value;
+                return null;
+        }
+    }
+
+    public function __isset($name)
+    {
+        switch ($name) {
+            case 'author':
+                return !empty($this->author_id);
+                break;
+            default:
+                return null;
         }
     }
 }

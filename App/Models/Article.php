@@ -3,12 +3,14 @@
 namespace App\Models;
 
 use App\Components\Db;
+use App\Components\Validator;
 use App\Exceptions\Validation;
 
 /**
- * Class One
- * @property $title
- * @property $content
+ * Class Article
+ * @property $id
+ * @property string $title
+ * @property string $content
  * @property int $author_id
  * @property int $heading_id
  * @property object $author
@@ -16,6 +18,8 @@ use App\Exceptions\Validation;
 class Article extends Model
 {
     public const TABLE = 'articles';
+
+    use Validator;
 
     public function __get($name)
     {
@@ -66,25 +70,5 @@ class Article extends Model
             return false;
         }
         return $res;
-    }
-
-    protected function validator($prop, $value)
-    {
-        switch ($prop) {
-            case 'title':
-                if (empty($value)) {
-                    throw new Validation('Заголовок не должен быть пустым!');
-                }
-                return $this->$prop = $value;
-                break;
-            case 'content':
-                if (empty($value)) {
-                    throw new Validation('Текст не должен быть пустым!');
-                }
-                return $this->$prop = $value;
-                break;
-            default:
-                return $this->$prop = $value;
-        }
     }
 }

@@ -3,19 +3,24 @@
 namespace App\Models;
 
 use App\Components\Db;
+use App\Components\Validator;
 use App\Exceptions\Validation;
 
 /**
- * Class Comment+
- * @property $comment
- * @property $record_id
- * @property $module
- * @property $date
+ * Class Comment
+ * @property $id
+ * @property string $comment
+ * @property int $record_id
+ * @property int $module_id
+ * @property int $author_id
+ * @property $created_at
  * @property object $author
  */
 class Comment extends Model
 {
     const TABLE = 'comments';
+
+    use Validator;
 
     public function __get($name)
     {
@@ -74,20 +79,4 @@ class Comment extends Model
         $this->id = $db->lastId();
         return $res;
     }
-
-    protected function validator($prop, $value)
-    {
-        switch ($prop) {
-            case 'comment':
-                if (empty($value)) {
-                    throw new Validation('Комментарий не должен быть пустым!');
-                }
-                return $this->$prop = $value;
-                break;
-            default:
-                return $this->$prop = $value;
-        }
-    }
-
-
 }

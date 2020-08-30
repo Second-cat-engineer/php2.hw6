@@ -6,6 +6,8 @@ use App\Components\Db;
 use App\Models\Model;
 
 /**
+ * class User
+ * @property $id
  * @property $login
  * @property $passwordHash
  * @property $access

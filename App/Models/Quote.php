@@ -2,11 +2,22 @@
 
 namespace App\Models;
 
+use App\Components\Validator;
 use App\Exceptions\Validation;
 
+/**
+ * Class Quote
+ * @property $id
+ * @property string $quote
+ * @property string $content
+ * @property $created_at
+ * @property object $author
+ */
 class Quote extends Model
 {
     public const TABLE = 'quotes';
+
+    use Validator;
 
     public function __get($name)
     {
@@ -27,26 +38,6 @@ class Quote extends Model
                 break;
             default:
                 return null;
-        }
-    }
-
-    protected function validator($prop, $value)
-    {
-        switch ($prop) {
-            case 'quote':
-                if (empty($value)) {
-                    throw new Validation('Цитата не должна быть пустым!');
-                }
-                return $this->$prop = $value;
-                break;
-            case 'content':
-                if (empty($value)) {
-                    throw new Validation('Текст не должен быть пустым!');
-                }
-                return $this->$prop = $value;
-                break;
-            default:
-                return $this->$prop = $value;
         }
     }
 }
