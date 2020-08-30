@@ -6,6 +6,7 @@ use App\Controllers\AdminController;
 use App\Exceptions\Error404;
 use App\Exceptions\MultiException;
 use App\Models\Quote;
+use App\Models\User;
 
 class Save extends AdminController
 {
@@ -31,6 +32,7 @@ class Save extends AdminController
             exit();
         }
 
+        $quote->author_id = User::findByLogin($_SESSION['userLogin'])->getId();
         $quote->save();
         header('Location: /admin/quote/all');
     }

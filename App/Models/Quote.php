@@ -6,22 +6,47 @@ use App\Exceptions\Validation;
 
 class Quote extends Model
 {
-    protected const TABLE = 'quotes';
+    public const TABLE = 'quotes';
 
-
-    public function validatorQuote($quote)
+    public function __get($name)
     {
-        if (empty($quote)) {
-            throw new Validation('Заголовок не должен быть пустым!');
+        switch ($name) {
+            case 'author':
+                return User::findById($this->author_id);
+                break;
+            default:
+                return null;
         }
-        return true;
     }
 
-    public function validatorContent($content)
+    public function __isset($name)
     {
-        if (empty($content)) {
-            throw new Validation('Текст не должен быть пустым!');
+        switch ($name) {
+            case 'author':
+                return !empty($this->author_id);
+                break;
+            default:
+                return null;
         }
-        return true;
+    }
+
+    protected function validator($prop, $value)
+    {
+        switch ($prop) {
+            case 'quote':
+                if (empty($value)) {
+                    throw new Validation('Цитата не должна быть пустым!');
+                }
+                return $this->$prop = $value;
+                break;
+            case 'content':
+                if (empty($value)) {
+                    throw new Validation('Текст не должен быть пустым!');
+                }
+                return $this->$prop = $value;
+                break;
+            default:
+                return $this->$prop = $value;
+        }
     }
 }

@@ -11,11 +11,7 @@ class FindByTitle extends BaseController
     protected function action()
     {
         $title = $_POST['title'];
-        if (empty($title)) {
-            $articles = Article::findAll();
-        } else {
-            $articles = Article::findByTitle($title);
-        }
+        $articles = Article::findByTitle($title);
 
         if (empty($articles)) {
             throw new Error404('Статьи с таким заголовком не найдены!', 404);

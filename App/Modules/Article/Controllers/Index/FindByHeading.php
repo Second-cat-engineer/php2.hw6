@@ -17,7 +17,7 @@ class FindByHeading extends BaseController
 
         $articles = Article::findByHeadingId($heading_id);
 
-        if (false === $articles) {
+        if (empty($articles)) {
             throw new Error404('Страница не найдена!', 404);
         }
         $this->view->twigDisplay('/App/Modules/Article/templates/index/findByHeading.html', [

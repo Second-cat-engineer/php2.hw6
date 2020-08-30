@@ -11,6 +11,7 @@ class Delete extends AdminController
     protected function action()
     {
         $quote = Quote::findById($_POST['id']);
+
         if (false === $quote) {
             throw new Error404('Ошибка при удалении! Quote с таким id не существует', 404);
         }
@@ -18,5 +19,4 @@ class Delete extends AdminController
 
         header('Location: /admin/quote/all');
     }
-
 }

@@ -15,27 +15,34 @@ use App\Exceptions\Validation;
  */
 class Article extends Model
 {
-    protected const TABLE = 'articles';
+    public const TABLE = 'articles';
 
-    protected function validatorTitle($title)
+    public function __get($name)
     {
-        if (empty($title)) {
-            throw new Validation('Заголовок не должен быть пустым!');
+        switch ($name) {
+            case 'author':
+                return User::findById($this->author_id);
+                break;
+            case 'heading':
+                return Heading::findById($this->heading_id);
+                break;
+            default:
+                return null;
         }
-        return true;
     }
 
-    protected function validatorContent($content)
+    public function __isset($name)
     {
-        if (empty($content)) {
-            throw new Validation('Текст не должен быть пустым!');
+        switch ($name) {
+            case 'author':
+                return !empty($this->author_id);
+                break;
+            case 'heading':
+                return !empty($this->heading_id);
+                break;
+            default:
+                return null;
         }
-        return true;
-    }
-
-    protected function validatorHeading_id($heading_id)
-    {
-        return true;
     }
 
     public static function findByHeadingId($heading_id)
@@ -59,5 +66,25 @@ class Article extends Model
             return false;
         }
         return $res;
+    }
+
+    protected function validator($prop, $value)
+    {
+        switch ($prop) {
+            case 'title':
+                if (empty($value)) {
+                    throw new Validation('Заголовок не должен быть пустым!');
+                }
+                return $this->$prop = $value;
+                break;
+            case 'content':
+                if (empty($value)) {
+                    throw new Validation('Текст не должен быть пустым!');
+                }
+                return $this->$prop = $value;
+                break;
+            default:
+                return $this->$prop = $value;
+        }
     }
 }

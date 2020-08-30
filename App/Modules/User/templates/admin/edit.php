@@ -2,9 +2,9 @@
 
 <form action="/admin/user/save" method="post">
     <?php echo $this->user->login; ?>
-    <select name="operation">
-        <option>user</option>
-        <option>admin</option>
+    <select name="access">
+        <option value="user">user</option>
+        <option value="admin">admin</option>
     </select>
     <button type="submit" name="id" value="<?php echo $this->user->getId(); ?>">
         Сохранить

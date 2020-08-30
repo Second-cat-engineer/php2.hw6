@@ -14,8 +14,9 @@ class Save extends AdminController
         if (false === $user) {
             throw new Error404('Ошибка при сохранении! User с таким id не существует', 404);
         }
+        $user->access = $_POST['access'];
 
-        $user->save();
+        $user->updateAccess();
         header('Location: /admin/user/all');
     }
 }

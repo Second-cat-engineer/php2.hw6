@@ -7,9 +7,10 @@
         <td> id </td>
         <td> Заголовок </td>
         <td> Текст </td>
-        <td> Изоголок </td>
-        <td> Редактировать описание фотографии </td>
+        <td> Изображение </td>
+        <td> Редактировать описание </td>
         <td> Удалить </td>
+        <td> Посмотреть комментарии к данной статье</td>
     </tr>
     <?php foreach ($this->images as $image) { ?>
         <tr>
@@ -31,7 +32,20 @@
                     </button>
                 </form>
             </td>
+            <td>
+                <form action= "/admin/comment/allOfRecord" method= "post" >
+                    <input type="hidden" name="modelName" value="image">
+                    <button name="recordId" value="<?php echo $image->getId() ?>">
+                        Комментарии
+                    </button>
+                </form>
+            </td>
         </tr>
     <?php } ?>
 </table>
 <a href="/admin/image/add"> Добавить новое изображение </a>
+
+<hr>
+<h4>
+    <a href="/"> Выход из админ панели </a>
+</h4>

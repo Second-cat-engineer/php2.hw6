@@ -15,7 +15,7 @@ class User extends Model
     protected const TABLE = 'users';
     public string $login;
     public string $access;
-    protected string $passwordHash;
+    public string $passwordHash;
 
     public static function findByLogin($login)
     {
@@ -27,5 +27,16 @@ class User extends Model
             return false;
         }
         return $res[0];
+    }
+
+    public function updateAccess()
+    {
+        $data[':id'] = $this->id;
+        $data[':access'] = $this->access;
+
+        $sql = 'UPDATE ' . static::TABLE . ' SET access=:access WHERE id=:id';
+
+        $db = Db::instance();
+        return $db->execute($sql, $data);
     }
 }

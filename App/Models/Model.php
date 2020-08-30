@@ -56,6 +56,14 @@ abstract class Model
             if ('id' == $name) {
                 continue;
             }
+
+            if ('module' == $name) {
+                $columns[] = 'module_id';
+                $binds[] = ':module_id';
+                $data[':module_id'] = '(SELECT id FROM modules WHERE module=\'' . $value . '\')';
+                continue;
+            }
+
             $columns[] = $name;
             $binds[] = ':' . $name;
             $data[':' . $name] = $value;
@@ -64,6 +72,7 @@ abstract class Model
         $sql = 'INSERT INTO ' . static::TABLE . ' 
         (' . implode(', ', $columns) . ') 
         VALUES (' . implode(', ', $binds) . ' )';
+        var_dump($sql);
 
         $db = Db::instance();
         $res = $db->execute($sql, $data);
@@ -119,12 +128,8 @@ abstract class Model
             if ('id' == $prop) {
                 continue;
             }
-            $methodName = 'validator' . ucfirst($prop);
-
             try {
-                if ($this->$methodName($value)) {
-                    $this->$prop = $value;
-                }
+                $this->validator($prop, $value);
             } catch (\App\Exceptions\Validation $e) {
                 $errors->add($e);
             }
@@ -140,33 +145,5 @@ abstract class Model
         $db = Db::instance();
         $sql = 'SELECT * FROM ' . static::TABLE;
         return $db->queryEach($sql, static::class);
-    }
-
-    public function __get($name)
-    {
-        switch ($name) {
-            case 'author':
-                return User::findById($this->author_id);
-                break;
-            case 'heading':
-                return Heading::findById($this->heading_id);
-                break;
-            default:
-                return null;
-        }
-    }
-
-    public function __isset($name)
-    {
-        switch ($name) {
-            case 'author':
-                return !empty($this->author_id);
-                break;
-            case 'heading':
-                return !empty($this->heading_id);
-                break;
-            default:
-                return null;
-        }
     }
 }

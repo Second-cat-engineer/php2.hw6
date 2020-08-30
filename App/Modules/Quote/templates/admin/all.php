@@ -7,14 +7,17 @@
         <td>id </td>
         <td>Цитата</td>
         <td>Текст</td>
+        <td>Автор</td>
         <td>Редактировать</td>
         <td>Удалить</td>
+        <td>Посмотреть комментарии к данной статье</td>
     </tr>
     <?php foreach ($this->quotes as $quote) { ?>
         <tr>
             <td><?php echo $quote->getId(); ?></td>
             <td><?php echo $quote->quote; ?></td>
             <td><?php echo $quote->content; ?></td>
+            <td><?php echo $quote->author->login; ?></td>
             <td>
                 <form action= "/admin/quote/edit" method= "post" >
                     <button name="id" value="<?php echo $quote->getId() ?>">
@@ -29,7 +32,20 @@
                     </button>
                 </form>
             </td>
+            <td>
+                <form action= "/admin/comment/allOfRecord" method= "post" >
+                    <input type="hidden" name="modelName" value="quote">
+                    <button name="recordId" value="<?php echo $quote->getId() ?>">
+                        Комментарии
+                    </button>
+                </form>
+            </td>
         </tr>
     <?php } ?>
 </table>
 <a href="/admin/quote/add"> Добавить новую цитату</a>
+
+<hr>
+<h4>
+    <a href="/"> Выход из админ панели </a>
+</h4>

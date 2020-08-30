@@ -22,7 +22,7 @@
     </div>
 
 
-    <!-- Comments -->
+    <!-- AllOfRecord -->
     Комментарии: <br>
     {% for comment in comments %}
         <div style="border: 1px; color: black">
@@ -40,11 +40,13 @@
     {% endfor %}
 
     {% if user %}
-        <form action="/comment/add" method="post">
+        <form action="/comment/add" method="post"> <!-- /?controller=article&moduleName=articles -->
+            <input type="hidden" name="moduleName" value="articles">
+            <input type="hidden" name="controller" value="article">
             Добавить комментарий <br>
             <textarea name="comment" cols="20" rows="1"></textarea>
             <br>
-            <button type="submit" name="article_id" value="{{ article.id }}">
+            <button type="submit" name="recordId" value="{{ article.id }}">
                 отправить
             </button>
         </form>
