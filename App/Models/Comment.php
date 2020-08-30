@@ -12,6 +12,7 @@ use App\Exceptions\Validation;
  * @property string $comment
  * @property int $record_id
  * @property int $module_id
+ * @property $module
  * @property int $author_id
  * @property $created_at
  * @property object $author
@@ -65,14 +66,12 @@ class Comment extends Model
         $props['author_id'] = $this->author_id;
         $props['record_id'] = $this->record_id;
         $props['module'] = $this->module;
-        //var_dump($props);
 
         $sql = 'INSERT INTO ' . static::TABLE .
             ' (comment, record_id, author_id, module_id) 
             VALUES (\'' . $props['comment'] . '\' , \'' . $props['record_id'] . '\' , 
             \'' . $props['author_id'] . '\' , 
             (SELECT id FROM modules WHERE module=\'' . $props['module'] . '\') )';
-        //var_dump($sql);
 
         $db = Db::instance();
         $res = $db->execute($sql, []);

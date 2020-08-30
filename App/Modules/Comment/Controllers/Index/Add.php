@@ -38,8 +38,6 @@ class Add extends BaseController
         $comment->author_id = $this->view->user->getId();
         $comment->module = $moduleName;
 
-
-        //$comment->save();
         $comment->saveComment();
         header('Location: /' . $controllerName . '/one/?id=' . $recordId);
     }

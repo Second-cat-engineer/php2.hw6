@@ -9,6 +9,17 @@
             <div>
                 <img src="/src/images/{{ image.path }}" style = "width: 100%">
             </div>
+            <div>
+                {{ image.content }}
+            </div>
+            <div style="font-size: 15px">
+                {% if image.author %}
+                Автор статьи: {{ image.author.login }}
+                {% endif %}
+            </div>
+            <div style="font-size: 15px">
+                Дата публикации: {{ image.created_at|date(fromat, timezon) }}
+            </div>
         </div>
     </div>
 

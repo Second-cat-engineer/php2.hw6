@@ -57,13 +57,6 @@ abstract class Model
                 continue;
             }
 
-            if ('module' == $name) {
-                $columns[] = 'module_id';
-                $binds[] = ':module_id';
-                $data[':module_id'] = '(SELECT id FROM modules WHERE module=\'' . $value . '\')';
-                continue;
-            }
-
             $columns[] = $name;
             $binds[] = ':' . $name;
             $data[':' . $name] = $value;
